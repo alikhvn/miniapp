@@ -7,17 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    protected $fillable = [
-        'name_en',
-        'name_ru',
-        'name_kz',
-        'country',
-        'iso2',
-        'region',
-        'capital',
-        'lat',
-        'lng',
-        'population',
-    ];
+    protected $guarded = false;
+    protected function casts(): array
+    {
+        return [
+            'name' => 'array',
+        ];
+    }
 }
 

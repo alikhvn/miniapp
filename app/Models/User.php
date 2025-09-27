@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'role', 'car_info', 'license_plate', 'rating', 'total_ratings',
-        'telegram_id', 'first_name', 'last_name', 'username', 'photo_url', 'phone', 'fixed_price'
+        'telegram_id', 'first_name', 'last_name', 'username', 'photo_url', 'phone', 'fixed_price','email','password'
     ];
 
     /**

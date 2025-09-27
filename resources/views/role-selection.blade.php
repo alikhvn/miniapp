@@ -19,7 +19,8 @@
                 <!-- Passenger Card -->
                 <label class="relative">
                     <input type="radio" name="role" value="passenger" class="hidden peer" checked>
-                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-5 transition-all duration-300 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-200 peer-checked:shadow-lg cursor-pointer">
+                    <div
+                        class="bg-white border-2 border-gray-200 rounded-2xl p-5 transition-all duration-300 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-200 peer-checked:shadow-lg cursor-pointer">
                         <div class="flex items-center">
                             <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
                                 <span class="material-icons text-blue-500">person</span>
@@ -28,7 +29,8 @@
                                 <h3 class="font-semibold text-gray-800">Пассажир</h3>
                                 <p class="text-gray-500 text-sm">Заказывайте поездки и находите водителей</p>
                             </div>
-                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-blue-500 peer-checked:bg-blue-500 flex items-center justify-center">
+                            <div
+                                class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-blue-500 peer-checked:bg-blue-500 flex items-center justify-center">
                                 <span class="material-icons text-white text-sm hidden peer-checked:block">check</span>
                             </div>
                         </div>
@@ -38,7 +40,8 @@
                 <!-- Driver Card -->
                 <label class="relative">
                     <input type="radio" name="role" value="driver" class="hidden peer">
-                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-5 transition-all duration-300 peer-checked:border-green-500 peer-checked:ring-2 peer-checked:ring-green-200 peer-checked:shadow-lg cursor-pointer">
+                    <div
+                        class="bg-white border-2 border-gray-200 rounded-2xl p-5 transition-all duration-300 peer-checked:border-green-500 peer-checked:ring-2 peer-checked:ring-green-200 peer-checked:shadow-lg cursor-pointer">
                         <div class="flex items-center">
                             <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
                                 <span class="material-icons text-green-500">directions_car</span>
@@ -47,7 +50,8 @@
                                 <h3 class="font-semibold text-gray-800">Водитель</h3>
                                 <p class="text-gray-500 text-sm">Принимайте заказы и зарабатывайте</p>
                             </div>
-                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-green-500 peer-checked:bg-green-500 flex items-center justify-center">
+                            <div
+                                class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-green-500 peer-checked:bg-green-500 flex items-center justify-center">
                                 <span class="material-icons text-white text-sm hidden peer-checked:block">check</span>
                             </div>
                         </div>
@@ -76,7 +80,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-blue-500 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:bg-blue-600 transition-colors transform hover:scale-105">
+            <button type="submit"
+                    class="w-full bg-blue-500 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:bg-blue-600 transition-colors transform hover:scale-105">
                 Продолжить
             </button>
         </form>
@@ -89,12 +94,12 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const roleRadios = document.querySelectorAll('input[name="role"]');
             const driverFields = document.getElementById('driver-fields');
 
             roleRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
+                radio.addEventListener('change', function () {
                     driverFields.classList.toggle('hidden', this.value !== 'driver');
 
                     // Add validation for driver fields
@@ -104,6 +109,14 @@
                     });
                 });
             });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            @if(session('notify'))
+            window.dispatchEvent(new CustomEvent('notify', {
+                detail: @json(session('notify'))
+            }));
+            @endif
         });
     </script>
 @endsection

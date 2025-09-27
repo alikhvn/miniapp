@@ -21,6 +21,8 @@ Route::get('/', [CityController::class, 'index'])->name('home');
 Route::get('/cities/search', [CityController::class, 'search'])->name('cities.search');
 Route::get('/city/{id}', [CityController::class, 'show'])->name('city.show');
 Route::post('/city/select/{id}', [CityController::class, 'select'])->name('city.select');
+Route::post('/detect-city', [CityController::class, 'detectCity'])->name('cities.detect');
+
 
 // Маршруты с Telegram аутентификацией
 Route::middleware(['web', TelegramAuth::class])->group(function () {

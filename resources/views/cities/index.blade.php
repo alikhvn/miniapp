@@ -37,7 +37,7 @@
                 <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
                     <div class="flex items-center">
                         <span class="material-icons text-green-500 mr-2">check_circle</span>
-                        <span class="text-green-700 font-medium">Выбран город: {{ $currentCity->name_en }}</span>
+                        <span class="text-green-700 font-medium">Выбран город: {{ $currentCity->name['ru'] }}</span>
                     </div>
                 </div>
             @endif
@@ -152,5 +152,36 @@
                 }
             });
         });
+
+        // Автодетект города по геопозиции
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                try {
+                    let response = await fetch("/detect-city", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                        },
+                        body: JSON.stringify({ lat, lng })
+                    });
+
+                    let data = await response.json();
+
+                    if (data.city) {
+                        // автозаполняем input поиска
+                        document.getElementById("city-search").value = data.city;
+                    }
+                } catch (error) {
+                    console.error("Ошибка при определении города:", error);
+                }
+            }, (error) => {
+                console.warn("Геопозиция не разрешена пользователем:", error);
+            });
+        }
+
     </script>
 @endsection

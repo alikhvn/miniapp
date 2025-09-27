@@ -12,6 +12,7 @@ class RoleController extends Controller
         return view('role-selection');
     }
 
+
     public function setRole(Request $request)
     {
         $request->validate([
@@ -33,7 +34,14 @@ class RoleController extends Controller
 
         $user->save();
 
-        return redirect()->route('home')->with('success', 'Роль успешно установлена!');
+        return redirect()
+            ->route('home')
+            ->with('notify', [
+                'title' => 'Успешно!',
+                'body'  => 'Роль успешно сохранена.',
+                'status'=> 'success'
+            ]);
+
     }
 
     public function switchRole()
